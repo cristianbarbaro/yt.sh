@@ -7,4 +7,4 @@
 
 ### Example:
 
-* `./youtube-music.sh "https://www.youtube.com/watch?v=D0yxAGyL3V4 https://www.youtube.com/watch?v=4-XayQ-IVig"`
+* `./youtube-music.sh "https://www.youtube.com/watch?v=D0yxAGyL3V4 https://www.youtube.com/watch?v=fjySbtWRGgI"`

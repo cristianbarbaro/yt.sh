@@ -11,11 +11,11 @@ do
 
 	YT_VID_URL=$(echo $YT_VID_URLS | cut -d" " -f2)
 
-	echo -e "Playing ${YT_VID_URL}...\nPress 'Ctrl + C' for next song.\n"
+	echo -e "Playing ${URL}...\nPress 'Ctrl + C' for next song.\n"
 
-	mplayer -ao alsa:device=default $YT_VID_URL 2>/dev/null
+	mplayer -cache 16384 -cache-min 80 $YT_VID_URL 2>/dev/null
 
-	echo -e "${YT_VID_URL} has played. Next...\n"
+	echo -e "${URL} has played. Next...\n"
 
 done
 
