@@ -1,11 +1,17 @@
 #!/bin/bash
 
 play(){
-	VID=$1
-	if [[ $VID == *"mime=audio"* ]];
+	VID="$1"
+
+	if [[ $VID != *"mime="* ]];
 	then
-		echo -e "Playing ${VID}...\n\nPress 'Ctrl + C' for next song.\n"
+		TITLE="$TITLE $VID"
+	elif [[ $VID == *"mime=audio"* ]];
+	then
+		echo -e "\e[1;32mPlaying:${TITLE}\e[m\n"
+		echo -e "\e[31mPress 'Ctrl + C' (kill mplayer process) for next song when playing.\e[m\n"
 		mplayer -cache 16384 -cache-min 80 $VID 2>/dev/null
+		TITLE=""
 	fi
 }
 
@@ -15,11 +21,11 @@ play_urls() {
 	do
 		echo -e "Searching video url from YouTube for $URL...\n"
 		
-		YT_VID_URLS=$(/usr/local/bin/youtube-dl -g "$URL")
+		YT_VID_URLS=$(/usr/local/bin/youtube-dl -g -e "$URL")
 
 		for VID in $YT_VID_URLS
 		do 
-			play $VID
+			play "$VID"
 		done
 	done
 
@@ -31,7 +37,7 @@ play_list(){
 
 	echo -e "Downloading playlist. Please, wait...\n"
 
-	PLAYLIST=$(/usr/local/bin/youtube-dl -g --playlist-start 1 $URLS)
+	PLAYLIST=$(/usr/local/bin/youtube-dl -g -e -i --playlist-start 1 $URLS)
 
 	for VID in $PLAYLIST
 	do 
