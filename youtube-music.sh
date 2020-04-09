@@ -19,5 +19,7 @@ do
 
 done
 
+echo -e "No more links. Exiting..."
+
 exit 0
  
