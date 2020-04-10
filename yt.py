@@ -72,8 +72,6 @@ args = parser.parse_args()
 urls = args.urls
 playlist = args.list
 
-videos = []
-
 if urls:
     videos = get_videos_from_urls(urls)
     show_list(videos)
