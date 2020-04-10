@@ -59,8 +59,8 @@ def get_videos_from_playlist(playlist):
             vid_dict["video_url"] = line
         elif "mime=audio" in line:
             vid_dict["audio_url"] = line
-            vid_dict = {}
             videos.append(vid_dict)
+            vid_dict = {}
     return videos
 
 

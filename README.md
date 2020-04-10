@@ -10,4 +10,4 @@
 * List of urls:
     * `./youtube-music.sh -u "https://www.youtube.com/watch?v=D0yxAGyL3V4 https://www.youtube.com/watch?v=4-XayQ-IVig"`
 * Playlist:
-    * `./youtube-music.sh -p "https://www.youtube.com/watch?v=HXCyfOCRHOo&list=RDRscHbZIHaAU"`
+    * `./youtube-music.sh -p "https://www.youtube.com/watch?list=PLD4270F9ADEDABCFB"`
