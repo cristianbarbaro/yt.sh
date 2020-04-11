@@ -2,6 +2,8 @@
 
 import argparse
 import subprocess
+from mplayer import Player, CmdPrefix
+import time
 from colorama import Fore, Style
 from subprocess import Popen
 
@@ -15,12 +17,11 @@ def show_list(videos):
     print("======================================================================\n")
 
 
-def play_videos(videos):
+def play_videos(videos, player):
     for video in videos:
         print(Fore.GREEN + "Now playing {0}".format(video["title"]) + Style.RESET_ALL) 
-        p = Popen(["mplayer", "-slave", "-quiet", "-cache", "16384", "-cache-min", "80", video["audio_url"]], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        p.wait()
-        output, errors = p.communicate()
+        player.loadfile(video["audio_url"])
+        time.sleep(player.length)
         print("Next song...")
     print("No more music :(")
     return
@@ -72,12 +73,18 @@ args = parser.parse_args()
 urls = args.urls
 playlist = args.list
 
+Player.cmd_prefix = CmdPrefix.PAUSING_KEEP
+player = Player(args=({"cache-min":80, "cache":16384}))
+
 if urls:
     videos = get_videos_from_urls(urls)
     show_list(videos)
-    play_videos(videos)
+    play_videos(videos,player)
 
 elif playlist:
     videos = get_videos_from_playlist(playlist)
     show_list(videos)
-    play_videos(videos)
+    play_videos(videos,player)
+
+
+player.quit()
