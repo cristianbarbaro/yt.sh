@@ -30,7 +30,7 @@ play(){
 	elif [[ $VID == *"mime=audio"* ]];
 	then
 		echo -e "\e[1;32mPlaying:${TITLE}\e[m\n"
-		echo -e "\e[31mPress 'Ctrl + C' (kill mplayer process) for next song when playing.\e[m\n"
+		echo -e "\e[32mPress Enter for next track. Press Space or P for pause.\e[m\n"
 		mplayer -cache 16384 -cache-min 80 $VID 2>/dev/null
 		TITLE=""
 	fi
