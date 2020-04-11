@@ -1,5 +1,26 @@
 #!/bin/bash
 
+show_list(){
+	LIST=$1
+	TITLE=""
+	INDEX=1
+	echo "=================================== PLAYLIST ==================================="
+	for L in $LIST
+	do
+		if [[ $L != *"mime="* ]]
+		then
+			TITLE="$TITLE $L"
+		elif [[ $L == *"mime=audio"* ]]
+		then
+			echo "$INDEX.$TITLE"
+			TITLE=""
+			let "INDEX=INDEX+1"
+		fi
+	done
+	echo "================================================================================"
+}
+
+
 play(){
 	VID="$1"
 
@@ -22,7 +43,7 @@ play_urls() {
 		echo -e "Searching video url from YouTube for $URL...\n"
 		
 		YT_VID_URLS=$(/usr/local/bin/youtube-dl -g -e "$URL")
-
+	
 		for VID in $YT_VID_URLS
 		do 
 			play "$VID"
@@ -38,6 +59,8 @@ play_list(){
 	echo -e "Downloading playlist. Please, wait...\n"
 
 	PLAYLIST=$(/usr/local/bin/youtube-dl -g -e -i --playlist-start 1 $URLS)
+
+	show_list "$PLAYLIST"
 
 	for VID in $PLAYLIST
 	do 
